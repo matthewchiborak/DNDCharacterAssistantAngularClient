@@ -1,14 +1,18 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
+import { CharacterlistComponent } from './components/characterlist/characterlist.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CharacterlistComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+	HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
