@@ -1,0 +1,148 @@
+
+<textarea type="text" id="rollBox"></textarea>
+<hr/>
+<h2>{{character.name}}</h2>
+<hr/>
+	
+<div id="generalStats">
+	<button type="button" onclick="rollInit()">Initiative</button>
+	HP: 
+	<input id="hpSpinBox" type="number" min="0" max="{{character.maxHP}}" value="{{character.currentHP}}">
+	Hit Die Current: 
+	<input id="hitDieSpinBox" type="number" min="0" max="{{character.maxHitDie}}" value="{{character.currentHitDie}}">
+	Hit Die To Use: 
+	<input id="hitDieToUseSpinBox" type="number" min="0" max="{{character.maxHitDie}}" value="1">
+	<button type="button" onclick="rollHitDie()">Roll Hit Die</button>
+	<span>AC: {{character.ac}}</span>
+	<span>Speed: {{character.speed}}</span>
+</div>
+
+<hr/>
+<h3>Saving Throws</h3>
+<div id="savingThrowButtons">
+	<button type="button" onclick="saveThrowPressed(0)">Strength</button>
+	<button type="button" onclick="saveThrowPressed(1)">Dexterity</button>
+	<button type="button" onclick="saveThrowPressed(2)">Constitution</button>
+	<button type="button" onclick="saveThrowPressed(3)">Intelligence</button>
+	<button type="button" onclick="saveThrowPressed(4)">Wisdom</button>
+	<button type="button" onclick="saveThrowPressed(5)">Charisma</button>
+</div>
+
+<hr/>
+<h3>Skills</h3>
+<div id="skillButtons">
+	<span *ngFor="let skill of character.skills">
+		<button type="button" onclick="skillRoll(1,true)">{{skill.name}}</button>
+	</span>
+</div>
+
+<hr/>
+<h3>Cantrips</h3>
+<div id="cantrips">
+	<span *ngFor="let attack of character.attacks">
+		<button *ngIf="attack.level == 0" type="button" onclick="makeAttackRoll('/r 1d20+7','/r 2d10', 0)">{{attack.name}}</button>
+		<button *ngIf="attack.level == 0" type="button" onclick="openHelp('https://roll20.net/compendium/dnd5e/Fire%20Bolt#content')">?</button>
+	</span>
+</div>
+
+<hr/>
+<h3>Level 1 <input id="spellsSlots1" type="number" min="0" max="{{character.maxSlots1}}" value="{{character.currentSlots1}}"></h3>
+<div id="level1">
+	<span *ngFor="let attack of character.attacks">
+		<button *ngIf="attack.level == 1" type="button" onclick="makeAttackRoll('/r 1d20+7','/r 2d10', 0)">{{attack.name}}</button>
+		<button *ngIf="attack.level == 1" type="button" onclick="openHelp('https://roll20.net/compendium/dnd5e/Fire%20Bolt#content')">?</button>
+	</span>
+</div>
+
+<hr/>
+<h3>Level 2 <input id="spellsSlots2" type="number" min="0" max="{{character.maxSlots2}}" value="{{character.currentSlots2}}"></h3>
+<div id="level2">
+	<span *ngFor="let attack of character.attacks">
+		<button *ngIf="attack.level == 2" type="button" onclick="makeAttackRoll('/r 1d20+7','/r 2d10', 0)">{{attack.name}}</button>
+		<button *ngIf="attack.level == 2" type="button" onclick="openHelp('https://roll20.net/compendium/dnd5e/Fire%20Bolt#content')">?</button>
+	</span>
+</div>
+
+<hr/>
+<h3>Level 3 <input id="spellsSlots3" type="number" min="0" max="{{character.maxSlots3}}" value="{{character.currentSlots3}}"></h3>
+<div id="level3">
+	<span *ngFor="let attack of character.attacks">
+		<button *ngIf="attack.level == 3" type="button" onclick="makeAttackRoll('/r 1d20+7','/r 2d10', 0)">{{attack.name}}</button>
+		<button *ngIf="attack.level == 3" type="button" onclick="openHelp('https://roll20.net/compendium/dnd5e/Fire%20Bolt#content')">?</button>
+	</span>
+</div>
+
+<hr/>
+<h3>Level 4 <input id="spellsSlots4" type="number" min="0" max="{{character.maxSlots4}}" value="{{character.currentSlots4}}"></h3>
+<div id="level4">
+	<span *ngFor="let attack of character.attacks">
+		<button *ngIf="attack.level == 4" type="button" onclick="makeAttackRoll('/r 1d20+7','/r 2d10', 0)">{{attack.name}}</button>
+		<button *ngIf="attack.level == 4" type="button" onclick="openHelp('https://roll20.net/compendium/dnd5e/Fire%20Bolt#content')">?</button>
+	</span>
+</div>
+
+<hr/>
+<h3>Level 5 <input id="spellsSlots5" type="number" min="0" max="{{character.maxSlots5}}" value="{{character.currentSlots5}}"></h3>
+<div id="level5">
+	<span *ngFor="let attack of character.attacks">
+		<button *ngIf="attack.level == 5" type="button" onclick="makeAttackRoll('/r 1d20+7','/r 2d10', 0)">{{attack.name}}</button>
+		<button *ngIf="attack.level == 5" type="button" onclick="openHelp('https://roll20.net/compendium/dnd5e/Fire%20Bolt#content')">?</button>
+	</span>
+</div>
+
+<hr/>
+<h3>Level 6 <input id="spellsSlots6" type="number" min="0" max="{{character.maxSlots6}}" value="{{character.currentSlots6}}"></h3>
+<div id="level6">
+	<span *ngFor="let attack of character.attacks">
+		<button *ngIf="attack.level == 6" type="button" onclick="makeAttackRoll('/r 1d20+7','/r 2d10', 0)">{{attack.name}}</button>
+		<button *ngIf="attack.level == 6" type="button" onclick="openHelp('https://roll20.net/compendium/dnd5e/Fire%20Bolt#content')">?</button>
+	</span>
+</div>
+
+<hr/>
+<h3>Level 7 <input id="spellsSlots7" type="number" min="0" max="{{character.maxSlots7}}" value="{{character.currentSlots7}}"></h3>
+<div id="level7">
+	<span *ngFor="let attack of character.attacks">
+		<button *ngIf="attack.level == 7" type="button" onclick="makeAttackRoll('/r 1d20+7','/r 2d10', 0)">{{attack.name}}</button>
+		<button *ngIf="attack.level == 7" type="button" onclick="openHelp('https://roll20.net/compendium/dnd5e/Fire%20Bolt#content')">?</button>
+	</span>
+</div>
+
+<hr/>
+<h3>Level 8 <input id="spellsSlots8" type="number" min="0" max="{{character.maxSlots8}}" value="{{character.currentSlots8}}"></h3>
+<div id="level8">
+	<span *ngFor="let attack of character.attacks">
+		<button *ngIf="attack.level == 8" type="button" onclick="makeAttackRoll('/r 1d20+7','/r 2d10', 0)">{{attack.name}}</button>
+		<button *ngIf="attack.level == 8" type="button" onclick="openHelp('https://roll20.net/compendium/dnd5e/Fire%20Bolt#content')">?</button>
+	</span>
+</div>
+
+<hr/>
+<h3>Level 9 <input id="spellsSlots9" type="number" min="0" max="{{character.maxSlots9}}" value="{{character.currentSlots9}}"></h3>
+<div id="level9">
+	<span *ngFor="let attack of character.attacks">
+		<button *ngIf="attack.level == 9" type="button" onclick="makeAttackRoll('/r 1d20+7','/r 2d10', 0)">{{attack.name}}</button>
+		<button *ngIf="attack.level == 9" type="button" onclick="openHelp('https://roll20.net/compendium/dnd5e/Fire%20Bolt#content')">?</button>
+	</span>
+</div>
+
+<hr/>
+<h3>Counters</h3>
+<div id="counters">
+	<span *ngFor="let counter of character.counters">
+		{{counter.name}} <input id="wildMagic" type="number" min="0" max="{{counter.maxCount}}" value="{{counter.currentCount}}">
+	</span>
+</div>
+
+<hr/>
+<h3>Other References</h3>
+<div id="references">
+	<span *ngFor="let reference of character.references">
+		<!-- <button type="button" onclick="openHelp('{{reference.link}}')">{{reference.name}}</button> -->
+		<a href="{{reference.link}}">{{reference.name}}</a>
+	</span>
+</div>
+
+<hr/>
+
+<a routerLink="/">Go back</a>

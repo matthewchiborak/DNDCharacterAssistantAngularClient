@@ -41,4 +41,5 @@ export interface Character{
 		skills: any;
 		attacks: any;
 		counters: any;
+		references: any;
 }
