@@ -20,6 +20,7 @@ export interface Character{
 		wisdomScore: number;
 		currentHitDie: number;
 		maxHitDie: number;
+		hitDieDice: number;
 		currentSlots1: number;
 		currentSlots2: number;
 		currentSlots3: number;

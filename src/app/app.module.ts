@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { CharacterlistComponent } from './components/characterlist/characterlist.component';
 import { CharacterSheetComponent } from './components/character-sheet/character-sheet.component';
+import { ButtonComponent } from './components/button/button.component';
 
 const appRoutes: Routes  = [
 	{path: '', component: CharacterlistComponent},
@@ -16,7 +17,8 @@ const appRoutes: Routes  = [
   declarations: [
     AppComponent,
     CharacterlistComponent,
-    CharacterSheetComponent
+    CharacterSheetComponent,
+    ButtonComponent
   ],
   imports: [
     BrowserModule,

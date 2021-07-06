@@ -15,4 +15,8 @@ export class CharacterSheetService {
   getCharacter(id: string): Observable<Character> {
 	  return this.http.get<Character>(this.apiUrl + "/" + id);
   }
+  
+  convertScoreToMod(scoreValue: number): number {
+	  return (Math.floor(scoreValue / 2) - 5);
+  }
 }
