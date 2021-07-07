@@ -1,5 +1,6 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { Character } from '../../models/character';
+import { ServerMessage } from '../../models/serverMessage';
 import { CharacterSheetService } from '../../services/character-sheet.service';
 import { Router } from '@angular/router';
 
@@ -12,6 +13,7 @@ import { Router } from '@angular/router';
 export class CharacterSheetComponent implements OnInit {
 
 	@ViewChild('rollBox') rollBox: any = null;
+	@ViewChild('hpBox') hpBox: any = null;
 	@ViewChild('hitDieBox') hitDieBox: any = null;
 	@ViewChild('hitDieToUseBox') hitDieToUseBox: any = null;
 	@ViewChild('SlotsBox1') slotsBox1: any = null;
@@ -185,5 +187,31 @@ export class CharacterSheetComponent implements OnInit {
    
    openHelp(address: string): void {
 	   window.open(address, "Lookup");
+   }
+   
+   saveData(): void {	   
+   
+		this.character.currentHP = this.hpBox.nativeElement.value;
+		this.character.currentHitDie = this.hitDieBox.nativeElement.value;
+		this.character.currentSlots1 = this.slotsBox1.nativeElement.value;
+		this.character.currentSlots2 = this.slotsBox2.nativeElement.value;
+		this.character.currentSlots3 = this.slotsBox3.nativeElement.value;
+		this.character.currentSlots4 = this.slotsBox4.nativeElement.value;
+		this.character.currentSlots5 = this.slotsBox5.nativeElement.value;
+		this.character.currentSlots6 = this.slotsBox6.nativeElement.value;
+		this.character.currentSlots7 = this.slotsBox7.nativeElement.value;
+		this.character.currentSlots8 = this.slotsBox8.nativeElement.value;
+		this.character.currentSlots9 = this.slotsBox9.nativeElement.value;
+		
+		for(let i = 0; i < this.character.counters.length; i++) {
+			
+		}
+   
+	   this.characterSheetService.updateCharacter(this.character).subscribe((response) => {
+		   
+		   alert(response.message);
+		   
+		   });
+	   
    }
 }

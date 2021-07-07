@@ -7,7 +7,7 @@
 <div id="generalStats">
 	<app-button text="Initiative" (btnClick)="rollInit()"></app-button>
 	HP: 
-	<input id="hpSpinBox" type="number" min="0" max="{{character.maxHP}}" value="{{character.currentHP}}">
+	<input #hpBox id="hpSpinBox" type="number" min="0" max="{{character.maxHP}}" value="{{character.currentHP}}">
 	Hit Die Current: 
 	<input #hitDieBox id="hitDieSpinBox" type="number" min="0" max="{{character.maxHitDie}}" value="{{character.currentHitDie}}">
 	Hit Die To Use: 
@@ -129,8 +129,8 @@
 <hr/>
 <h3>Counters</h3>
 <div id="counters">
-	<span *ngFor="let counter of character.counters">
-		{{counter.name}} <input id="wildMagic" type="number" min="0" max="{{counter.maxCount}}" value="{{counter.currentCount}}">
+	<span *ngFor="let counter of character.counters; let i = index">
+		<app-counter-box [counter]=counter [boxId]=i></app-counter-box>
 	</span>
 </div>
 
@@ -143,5 +143,6 @@
 </div>
 
 <hr/>
-
+<app-button text="Save" (btnClick)="saveData()"></app-button>
+<hr/>
 <a routerLink="/">Go back</a>
