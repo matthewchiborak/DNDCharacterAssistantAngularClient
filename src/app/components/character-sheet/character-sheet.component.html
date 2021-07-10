@@ -130,7 +130,7 @@
 <h3>Counters</h3>
 <div id="counters">
 	<span *ngFor="let counter of character.counters; let i = index">
-		<app-counter-box [counter]=counter [boxId]=i></app-counter-box>
+		<app-counter-box [counter]=counter [boxId]=i (onValueChanged)="changeCounterValue($event)"></app-counter-box>
 	</span>
 </div>
 

@@ -17,5 +17,7 @@ export class CounterBoxComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
+	onChange(newValue: any): void {
+		this.onValueChanged.emit(newValue);
+	}
 }

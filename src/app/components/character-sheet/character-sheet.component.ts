@@ -203,15 +203,20 @@ export class CharacterSheetComponent implements OnInit {
 		this.character.currentSlots8 = this.slotsBox8.nativeElement.value;
 		this.character.currentSlots9 = this.slotsBox9.nativeElement.value;
 		
-		for(let i = 0; i < this.character.counters.length; i++) {
-			
-		}
-   
 	   this.characterSheetService.updateCharacter(this.character).subscribe((response) => {
 		   
 		   alert(response.message);
 		   
 		   });
+	   
+   }
+   
+   changeCounterValue(newEvent: any): void {
+	   
+	   let counterIndex = newEvent.srcElement.id.substring(7);
+	   console.log(counterIndex);
+	   
+	   this.character.counters[counterIndex].currentCount = newEvent.srcElement.value;
 	   
    }
 }
