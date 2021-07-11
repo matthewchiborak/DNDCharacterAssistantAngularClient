@@ -203,12 +203,12 @@ export class CharacterCreatorComponent implements OnInit {
     this.character.speed = this.speedBox.nativeElement.value;
     this.character.ac = this.acBox.nativeElement.value;
     this.character.proficiencyBonus = this.proficiencyBox.nativeElement.value;
-    this.character.strength = this.strengthSaveThrowBox.nativeElement.value;
-    this.character.constitution = this.constitutionSaveThrowBox.nativeElement.value;
-    this.character.charisma = this.charismaSaveThrowBox.nativeElement.value;
-    this.character.dexterity = this.dexteritySaveThrowBox.nativeElement.value;
-    this.character.intelligence = this.intelligenceSaveThrowBox.nativeElement.value;
-    this.character.wisdom = this.wisdomSaveThrowBox.nativeElement.value;
+    this.character.strength = this.strengthSaveThrowBox.nativeElement.checked;
+    this.character.constitution = this.constitutionSaveThrowBox.nativeElement.checked;
+    this.character.charisma = this.charismaSaveThrowBox.nativeElement.checked;
+    this.character.dexterity = this.dexteritySaveThrowBox.nativeElement.checked;
+    this.character.intelligence = this.intelligenceSaveThrowBox.nativeElement.checked;
+    this.character.wisdom = this.wisdomSaveThrowBox.nativeElement.checked;
     this.character.currentHP = this.hpBox.nativeElement.value;
     this.character.maxHP = this.hpBox.nativeElement.value;
     this.character.strengthScore = this.strengthScoreBox.nativeElement.value;
@@ -240,12 +240,137 @@ export class CharacterCreatorComponent implements OnInit {
     this.character.maxSlots9 = this.level9SlotsBox.nativeElement.value;
     
 	let newSkill = {
-		     "skill": "Dexterity",
+		    "skill": "Dexterity",
             "name": "Acrobatics (Dex)",
             "id": 13,
-            "proficient": true
+            "proficient": this.AcrobaticsSkillBox.nativeElement.checked
 	};
 	this.character.skills.push(newSkill);
+	newSkill = {
+            "skill": "Wisdom",
+            "name": "Animal Handling (Wis)",
+            "id": 14,
+            "proficient": this.AnimalHandlingSkillBox.nativeElement.checked
+	};
+	this.character.skills.push(newSkill);
+	newSkill = {
+            "skill": "Intelligence",
+            "name": "Arcana (Int)",
+            "id": 11,
+            "proficient": this.ArcanaSkillBox.nativeElement.checked
+	};
+	this.character.skills.push(newSkill);
+	newSkill = {
+            "skill": "Strength",
+            "name": "Athletics (Str)",
+            "id": 18,
+            "proficient": this.AthleticsSkillBox.nativeElement.checked
+	};
+	this.character.skills.push(newSkill);
+	newSkill = {
+            "skill": "Charisma",
+            "name": "Deception (Cha)",
+            "id": 4,
+            "proficient": this.DeceptionSkillBox.nativeElement.checked
+	};
+	this.character.skills.push(newSkill);
+	newSkill = {
+            "skill": "Intelligence",
+            "name": "History (Int)",
+            "id": 16,
+            "proficient": this.HistorySkillBox.nativeElement.checked
+	};
+	this.character.skills.push(newSkill);
+	newSkill = {
+            "skill": "Wisdom",
+            "name": "Insight (Wis)",
+            "id": 12,
+            "proficient": this.InsightSkillBox.nativeElement.checked
+	};
+	this.character.skills.push(newSkill);
+	newSkill = {
+            "skill": "Charisma",
+            "name": "Intimidation (Cha)",
+            "id": 2,
+            "proficient": this.IntimidationSkillBox.nativeElement.checked
+	};
+	this.character.skills.push(newSkill);
+	newSkill = {
+            "skill": "Intelligence",
+            "name": "Investigation (Int)",
+            "id": 3,
+            "proficient": this.InvestigationSkillBox.nativeElement.checked
+	};
+	this.character.skills.push(newSkill);
+	newSkill = {
+            "skill": "Wisdom",
+            "name": "Medicine (Wis)",
+            "id": 15,
+            "proficient": this.MedicineSkillBox.nativeElement.checked
+	};
+	this.character.skills.push(newSkill);
+	newSkill = {
+            "skill": "Intelligence",
+            "name": "Nature (Int)",
+            "id": 7,
+            "proficient": this.NatureSkillBox.nativeElement.checked
+	};
+	this.character.skills.push(newSkill);
+	newSkill = {
+            "skill": "Wisdom",
+            "name": "Perception (Wis)",
+            "id": 9,
+            "proficient": this.PerceptionSkillBox.nativeElement.checked
+	};
+	this.character.skills.push(newSkill);
+	newSkill = {
+            "skill": "Charisma",
+            "name": "Performance (Cha)",
+            "id": 10,
+            "proficient": this.PerformanceSkillBox.nativeElement.checked
+	};
+	this.character.skills.push(newSkill);
+	newSkill = {
+            "skill": "Charisma",
+            "name": "Persuasion (Cha)",
+            "id": 1,
+            "proficient": this.PersuasionSkillBox.nativeElement.checked
+	};
+	this.character.skills.push(newSkill);	
+	newSkill = {
+            "skill": "Intelligence",
+            "name": "Religion (Int)",
+            "id": 6,
+            "proficient": this.ReligionSkillBox.nativeElement.checked
+	};
+	this.character.skills.push(newSkill);
+	newSkill = {
+            "skill": "Dexterity",
+            "name": "Sleight of Hand (Dex)",
+            "id": 5,
+            "proficient": this.SleightofHandSkillBox.nativeElement.checked
+	};
+	this.character.skills.push(newSkill);
+	newSkill = {
+            "skill": "Dexterity",
+            "name": "Stealth (Dex)",
+            "id": 17,
+            "proficient": this.StealthSkillBox.nativeElement.checked
+	};
+	this.character.skills.push(newSkill);
+	newSkill = {
+            "skill": "Wisdom",
+            "name": "Survival (Wis)",
+            "id": 8,
+            "proficient": this.SurvivalSkillBox.nativeElement.checked
+	};
+	this.character.skills.push(newSkill);
+	
+		   this.characterCreatorService.createCharacter(this.character).subscribe((response) => {
+		   
+				alert(response.message);
+		   
+		   });
   }
   
 }

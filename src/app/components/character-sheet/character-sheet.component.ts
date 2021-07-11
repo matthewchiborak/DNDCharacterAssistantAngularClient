@@ -214,7 +214,6 @@ export class CharacterSheetComponent implements OnInit {
    changeCounterValue(newEvent: any): void {
 	   
 	   let counterIndex = newEvent.srcElement.id.substring(7);
-	   console.log(counterIndex);
 	   
 	   this.character.counters[counterIndex].currentCount = newEvent.srcElement.value;
 	   

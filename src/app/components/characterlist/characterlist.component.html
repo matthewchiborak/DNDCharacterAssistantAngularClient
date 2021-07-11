@@ -1,3 +1,6 @@
-<a *ngFor="let character of characters" [routerLink]="['/charactersheet', character.id]">{{character.name}}</a>
+<span *ngFor="let character of characters">
+	<a  [routerLink]="['/charactersheet', character.id]">{{character.name}}</a>
+	<br/>
+</span>
 <hr/>
 <a [routerLink]="['/charactercreator']">Add New</a>
