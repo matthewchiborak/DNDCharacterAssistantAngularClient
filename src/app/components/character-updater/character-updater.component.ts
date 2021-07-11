@@ -1,16 +1,21 @@
-import { Component, OnInit, ElementRef, ViewChild, ViewChildren } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { Character } from '../../models/character';
 import { ServerMessage } from '../../models/serverMessage';
-import { CharacterCreatorService } from '../../services/character-creator.service';
+import { CharacterUpdaterService } from '../../services/character-updater.service';
+import { CharacterSheetService } from '../../services/character-sheet.service';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-character-creator',
-  templateUrl: './character-creator.component.html',
-  styleUrls: ['./character-creator.component.css'],
-  providers: [CharacterCreatorService]
+  selector: 'app-character-updater',
+  templateUrl: './character-updater.component.html',
+  styleUrls: ['./character-updater.component.css'],
+  providers: [CharacterUpdaterService, CharacterSheetService]
 })
-export class CharacterCreatorComponent implements OnInit {
+export class CharacterUpdaterComponent implements OnInit {
 
+	character: Partial<Character> = {};
+	private theUrl: string = "";
+	
 	@ViewChild('nameBox') nameBox: any = null;
 	@ViewChild('speedBox') speedBox: any = null;
 	@ViewChild('acBox') acBox: any = null;
@@ -77,61 +82,77 @@ export class CharacterCreatorComponent implements OnInit {
 	@ViewChild('deleteCounterBox') deleteCounterBox: any = null;
 	@ViewChild('deleteReferenceBox') deleteReferenceBox: any = null;
 
-  character: Partial<Character> = {
-    "name": " ",
-    "speed": 0,
-    "ac": 0,
-    "proficiencyBonus": 0,
-    "strength": false,
-    "constitution": false,
-    "charisma": false,
-    "dexterity": false,
-    "intelligence": false,
-    "wisdom": false,
-    "currentHP": 0,
-    "maxHP": 0,
-    "strengthScore": 0,
-    "constitutionScore": 0,
-    "charismaScore": 0,
-    "dexterityScore": 0,
-    "intelligenceScore": 0,
-    "wisdomScore": 0,
-    "currentHitDie": 0,
-    "maxHitDie": 0,
-	"hitDieDice": 0,
-    "currentSlots1": 0,
-    "currentSlots2": 0,
-    "currentSlots3": 0,
-    "currentSlots4": 0,
-    "currentSlots5": 0,
-    "currentSlots6": 0,
-    "currentSlots7": 0,
-    "currentSlots8": 0,
-    "currentSlots9": 0,
-    "maxSlots1": 4,
-    "maxSlots2": 3,
-    "maxSlots3": 3,
-    "maxSlots4": 1,
-    "maxSlots5": 0,
-    "maxSlots6": 0,
-    "maxSlots7": 0,
-    "maxSlots8": 0,
-    "maxSlots9": 0,
-    "skills": [],
-    "attacks": [],
-    "counters": [],
-	"references": []
-};
+  constructor(private characterUpdaterService: CharacterUpdaterService, private characterSheetService: CharacterSheetService, private router: Router) { }
 
-  constructor(private characterCreatorService: CharacterCreatorService) { }
-  
-  
   ngOnInit(): void {
+	  this.populateFields();
+  }
+
+  populateFields(): void {
+	  	this.theUrl = this.router.url;
+		this.theUrl = this.theUrl.substring(this.theUrl.lastIndexOf('/') + 1);
+	  
+		this.characterSheetService.getCharacter(this.theUrl).subscribe((character) => {
+			this.character = character;
+			this.refreshAttacks();
+			this.refreshCounters();
+			this.refreshReferences();
+			this.refreshCheckBoxes();
+		});
   }
   
+  refreshCheckBoxes(): void {
+	 
+	 this.strengthSaveThrowBox.nativeElement.checked = this.character.strength;
+	 this.dexteritySaveThrowBox.nativeElement.checked = this.character.dexterity;
+	 this.constitutionSaveThrowBox.nativeElement.checked = this.character.constitution;
+	 this.intelligenceSaveThrowBox.nativeElement.checked = this.character.intelligence;
+	 this.wisdomSaveThrowBox.nativeElement.checked = this.character.wisdom;
+	 this.charismaSaveThrowBox.nativeElement.checked = this.character.charisma;
 
+	 for(let i = 0; i < this.character.skills.length; i++) {
+		 
+		 if(this.character.skills[i].name == "Acrobatics (Dex)")
+			 this.AcrobaticsSkillBox.nativeElement.checked = this.character.skills[i].proficient;
+		 if(this.character.skills[i].name == "Animal Handling (Wis)")
+			 this.AnimalHandlingSkillBox.nativeElement.checked = this.character.skills[i].proficient;
+		 if(this.character.skills[i].name == "Arcana (Int)")
+			 this.ArcanaSkillBox.nativeElement.checked = this.character.skills[i].proficient;
+		 if(this.character.skills[i].name == "Athletics (Str)")
+			 this.AthleticsSkillBox.nativeElement.checked = this.character.skills[i].proficient;
+		 if(this.character.skills[i].name == "Deception (Cha)")
+			 this.DeceptionSkillBox.nativeElement.checked = this.character.skills[i].proficient;
+		 if(this.character.skills[i].name == "History (Int)")
+			 this.HistorySkillBox.nativeElement.checked = this.character.skills[i].proficient;
+		 if(this.character.skills[i].name == "Insight (Wis)")
+			 this.InsightSkillBox.nativeElement.checked = this.character.skills[i].proficient;
+		 if(this.character.skills[i].name == "Intimidation (Cha)")
+			 this.IntimidationSkillBox.nativeElement.checked = this.character.skills[i].proficient;
+		 if(this.character.skills[i].name == "Investigation (Int)")
+			 this.InvestigationSkillBox.nativeElement.checked = this.character.skills[i].proficient;
+		 if(this.character.skills[i].name == "Medicine (Wis)")
+			 this.MedicineSkillBox.nativeElement.checked = this.character.skills[i].proficient;
+		 if(this.character.skills[i].name == "Nature (Int)")
+			 this.NatureSkillBox.nativeElement.checked = this.character.skills[i].proficient;
+		 if(this.character.skills[i].name == "Perception (Wis)")
+			 this.PerceptionSkillBox.nativeElement.checked = this.character.skills[i].proficient;
+		 if(this.character.skills[i].name == "Performance (Cha)")
+			 this.PerformanceSkillBox.nativeElement.checked = this.character.skills[i].proficient;
+		 if(this.character.skills[i].name == "Persuasion (Cha)")
+			 this.PersuasionSkillBox.nativeElement.checked = this.character.skills[i].proficient;
+		 if(this.character.skills[i].name == "Religion (Int)")
+			 this.ReligionSkillBox.nativeElement.checked = this.character.skills[i].proficient;
+		 if(this.character.skills[i].name == "Sleight of Hand (Dex)")
+			 this.SleightofHandSkillBox.nativeElement.checked = this.character.skills[i].proficient;
+		 if(this.character.skills[i].name == "Stealth (Dex)")
+			 this.StealthSkillBox.nativeElement.checked = this.character.skills[i].proficient;
+		 if(this.character.skills[i].name == "Survival (Wis)")
+			 this.SurvivalSkillBox.nativeElement.checked = this.character.skills[i].proficient;
+		 
+	 }	 
+  }
   
-  refreshAttacks(): void {
+    refreshAttacks(): void {
 	  let newInner = " ";
 	  
 	  for(let i = 0; i < this.character.attacks.length; i++) {
@@ -160,7 +181,7 @@ export class CharacterCreatorComponent implements OnInit {
 		this.refreshAttacks();
   }
   
-  deleteAttack(): void {
+    deleteAttack(): void {
 	  
 	  if(this.deleteAttackBox.nativeElement.value > 0 && this.deleteAttackBox.nativeElement.value <= this.character.attacks.length)
 		this.character.attacks.splice(this.deleteAttackBox.nativeElement.value-1, 1);
@@ -192,7 +213,7 @@ export class CharacterCreatorComponent implements OnInit {
 		this.refreshCounters();
   }
   
-    deleteCounter(): void {
+      deleteCounter(): void {
 	  
 	  if(this.deleteCounterBox.nativeElement.value > 0 && this.deleteCounterBox.nativeElement.value <= this.character.counters.length)
 		this.character.counters.splice(this.deleteCounterBox.nativeElement.value-1, 1);
@@ -221,7 +242,7 @@ export class CharacterCreatorComponent implements OnInit {
 		this.refreshReferences();
   }
   
-    deleteReference(): void {
+      deleteReference(): void {
 	  
 	  if(this.deleteReferenceBox.nativeElement.value > 0 && this.deleteReferenceBox.nativeElement.value <= this.character.references.length)
 		this.character.references.splice(this.deleteReferenceBox.nativeElement.value-1, 1);
@@ -231,8 +252,7 @@ export class CharacterCreatorComponent implements OnInit {
   /////////////
   
   saveCharacter(): void {
-	  
-	this.character.name = this.nameBox.nativeElement.value;
+	  this.character.name = this.nameBox.nativeElement.value;
     this.character.speed = this.speedBox.nativeElement.value;
     this.character.ac = this.acBox.nativeElement.value;
     this.character.proficiencyBonus = this.proficiencyBox.nativeElement.value;
@@ -271,6 +291,8 @@ export class CharacterCreatorComponent implements OnInit {
 	this.character.maxSlots7 = this.level7SlotsBox.nativeElement.value;
 	this.character.maxSlots8 = this.level8SlotsBox.nativeElement.value;
     this.character.maxSlots9 = this.level9SlotsBox.nativeElement.value;
+	
+	this.character.skills.length = 0;
     
 	let newSkill = {
 		    "skill": "Dexterity",
@@ -399,11 +421,10 @@ export class CharacterCreatorComponent implements OnInit {
 	};
 	this.character.skills.push(newSkill);
 	
-		   this.characterCreatorService.createCharacter(this.character).subscribe((response) => {
+		   this.characterUpdaterService.updateCharacter(this.character).subscribe((response) => {
 		   
 				alert(response.message);
 		   
 		   });
   }
-  
 }

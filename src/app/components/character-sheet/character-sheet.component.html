@@ -13,8 +13,8 @@
 	Hit Die To Use: 
 	<input #hitDieToUseBox id="hitDieToUseSpinBox" type="number" min="0" max="{{character.maxHitDie}}" value="1">
 	<app-button text="Roll Hit Die" (btnClick)="rollHitDie()"></app-button>
-	<span>AC: {{character.ac}}</span>
-	<span>Speed: {{character.speed}}</span>
+	<span> AC: {{character.ac}}</span>
+	<span> Speed: {{character.speed}}</span>
 </div>
 
 <hr/>
@@ -145,4 +145,6 @@
 <hr/>
 <app-button text="Save" (btnClick)="saveData()"></app-button>
 <hr/>
+<a [routerLink]="['/characterupdater', character.id]">Update</a>
+<br/>
 <a routerLink="/">Go back</a>

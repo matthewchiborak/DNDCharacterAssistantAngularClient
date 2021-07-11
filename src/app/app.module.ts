@@ -9,11 +9,13 @@ import { CharacterSheetComponent } from './components/character-sheet/character-
 import { ButtonComponent } from './components/button/button.component';
 import { CounterBoxComponent } from './components/counter-box/counter-box.component';
 import { CharacterCreatorComponent } from './components/character-creator/character-creator.component';
+import { CharacterUpdaterComponent } from './components/character-updater/character-updater.component';
 
 const appRoutes: Routes  = [
 	{path: '', component: CharacterlistComponent},
 	{path: 'charactersheet/:id', component: CharacterSheetComponent},
-	{path: 'charactercreator', component: CharacterCreatorComponent}
+	{path: 'charactercreator', component: CharacterCreatorComponent},
+	{path: 'characterupdater/:id', component: CharacterUpdaterComponent}
 ]
 
 @NgModule({
@@ -23,7 +25,8 @@ const appRoutes: Routes  = [
     CharacterSheetComponent,
     ButtonComponent,
     CounterBoxComponent,
-    CharacterCreatorComponent
+    CharacterCreatorComponent,
+    CharacterUpdaterComponent
   ],
   imports: [
     BrowserModule,

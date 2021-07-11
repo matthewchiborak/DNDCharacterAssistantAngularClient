@@ -1,47 +1,47 @@
-<h1>Character Creation</h1>
+<h1>Character Modification</h1>
 <hr/>
 
 <h2>General Stats</h2>
 <div id="generalStats">
 	<table>
 		<tr>
-			<td>Name:</td><td><input #nameBox id="nameBox" type="text" value="Barack Obama"></td>
+			<td>Name:</td><td><input #nameBox id="nameBox" type="text" value="{{character.name}}"></td>
 		</tr>
 		<tr>
-			<td>Speed:</td><td><input #speedBox id="speedBox" type="number" min="0" value="30"></td>
+			<td>Speed:</td><td><input #speedBox id="speedBox" type="number" min="0" value="{{character.speed}}"></td>
 		</tr>
 		<tr>
-			<td>AC:</td><td><input #acBox id="acBox" type="number" min="0" value="10"></td>
+			<td>AC:</td><td><input #acBox id="acBox" type="number" min="0" value="{{character.ac}}"></td>
 		</tr>
 		<tr>
-			<td>Proficiency Bonus:</td><td><input #proficiencyBox id="proficiencyBox" type="number" min="0" value="0"></td>
+			<td>Proficiency Bonus:</td><td><input #proficiencyBox id="proficiencyBox" type="number" min="0" value="{{character.proficiencyBonus}}"></td>
 		</tr>
 		<tr>
-			<td>HP:</td><td><input #hpBox id="hpBox" type="number" min="0" value="10"></td>
+			<td>HP:</td><td><input #hpBox id="hpBox" type="number" min="0" value="{{character.maxHP}}"></td>
 		</tr>
 		<tr>
-			<td>Strength Score:</td><td><input #strengthScoreBox id="strengthScoreBox" type="number" min="0" value="10"></td>
+			<td>Strength Score:</td><td><input #strengthScoreBox id="strengthScoreBox" type="number" min="0" value="{{character.strengthScore}}"></td>
 		</tr>
 		<tr>
-			<td>Dexterity Score:</td><td><input #dexterityScoreBox id="dexterityScoreBox" type="number" min="0" value="10"></td>
+			<td>Dexterity Score:</td><td><input #dexterityScoreBox id="dexterityScoreBox" type="number" min="0" value="{{character.dexterityScore}}"></td>
 		</tr>
 		<tr>
-			<td>Constitution Score:</td><td><input #constitutionScoreBox id="constitutionScoreBox" type="number" min="0" value="10"></td>
+			<td>Constitution Score:</td><td><input #constitutionScoreBox id="constitutionScoreBox" type="number" min="0" value="{{character.constitutionScore}}"></td>
 		</tr>
 		<tr>
-			<td>Intelligence Score:</td><td><input #intelligenceScoreBox id="intelligenceScoreBox" type="number" min="0" value="10"></td>
+			<td>Intelligence Score:</td><td><input #intelligenceScoreBox id="intelligenceScoreBox" type="number" min="0" value="{{character.intelligenceScore}}"></td>
 		</tr>
 		<tr>
-			<td>Wisdom Score:</td><td><input #wisdomScoreBox id="wisdomScoreBox" type="number" min="0" value="10"></td>
+			<td>Wisdom Score:</td><td><input #wisdomScoreBox id="wisdomScoreBox" type="number" min="0" value="{{character.wisdomScore}}"></td>
 		</tr>
 		<tr>
-			<td>Charisma Score:</td><td><input #charismaScoreBox id="charismaScoreBox" type="number" min="0" value="10"></td>
+			<td>Charisma Score:</td><td><input #charismaScoreBox id="charismaScoreBox" type="number" min="0" value="{{character.charismaScore}}"></td>
 		</tr>
 		<tr>
-			<td>Total Hit Die:</td><td><input #hitDieBox id="hitDieBox" type="number" min="0" value="1"></td>
+			<td>Total Hit Die:</td><td><input #hitDieBox id="hitDieBox" type="number" min="0" value="{{character.maxHitDie}}"></td>
 		</tr>
 		<tr>
-			<td>Hit Die Dice:</td><td><input #hitDieDiceBox id="hitDieDiceBox" type="number" min="0" value="6"></td>
+			<td>Hit Die Dice:</td><td><input #hitDieDiceBox id="hitDieDiceBox" type="number" min="0" value="{{character.hitDieDice}}"></td>
 		</tr>	
 	</table>
 </div>
@@ -51,31 +51,31 @@
 <div id="spellSlots">
 	<table>
 		<tr>
-			<td>Level 1:</td><td><input #level1SlotsBox id="level1SlotsBox" type="number" min="0"  value="0"></td>
+			<td>Level 1:</td><td><input #level1SlotsBox id="level1SlotsBox" type="number" min="0"  value="{{character.maxSlots1}}"></td>
 		</tr>
 		<tr>
-			<td>Level 2:</td><td><input #level2SlotsBox id="level2SlotsBox" type="number" min="0" value="0"></td>
+			<td>Level 2:</td><td><input #level2SlotsBox id="level2SlotsBox" type="number" min="0" value="{{character.maxSlots2}}"></td>
 		</tr>
 		<tr>
-			<td>Level 3:</td><td><input #level3SlotsBox id="level3SlotsBox" type="number" min="0" value="0"></td>
+			<td>Level 3:</td><td><input #level3SlotsBox id="level3SlotsBox" type="number" min="0" value="{{character.maxSlots3}}"></td>
 		</tr>
 		<tr>
-			<td>Level 4:</td><td><input #level4SlotsBox id="level4SlotsBox" type="number" min="0" value="0"></td>
+			<td>Level 4:</td><td><input #level4SlotsBox id="level4SlotsBox" type="number" min="0" value="{{character.maxSlots4}}"></td>
 		</tr>
 		<tr>
-			<td>Level 5:</td><td><input #level5SlotsBox id="level5SlotsBox" type="number" min="0" value="0"></td>
+			<td>Level 5:</td><td><input #level5SlotsBox id="level5SlotsBox" type="number" min="0" value="{{character.maxSlots5}}"></td>
 		</tr>
 		<tr>
-			<td>Level 6:</td><td><input #level6SlotsBox id="level6SlotsBox" type="number" min="0" value="0"></td>
+			<td>Level 6:</td><td><input #level6SlotsBox id="level6SlotsBox" type="number" min="0" value="{{character.maxSlots6}}"></td>
 		</tr>
 		<tr>
-			<td>Level 7:</td><td><input #level7SlotsBox id="level7SlotsBox" type="number" min="0" value="0"></td>
+			<td>Level 7:</td><td><input #level7SlotsBox id="level7SlotsBox" type="number" min="0" value="{{character.maxSlots7}}"></td>
 		</tr>
 		<tr>
-			<td>Level 8:</td><td><input #level8SlotsBox id="level8SlotsBox" type="number" min="0" value="0"></td>
+			<td>Level 8:</td><td><input #level8SlotsBox id="level8SlotsBox" type="number" min="0" value="{{character.maxSlots8}}"></td>
 		</tr>
 		<tr>
-			<td>Level 9:</td><td><input #level9SlotsBox id="level9SlotsBox" type="number" min="0" value="0"></td>
+			<td>Level 9:</td><td><input #level9SlotsBox id="level9SlotsBox" type="number" min="0" value="{{character.maxSlots9}}"></td>
 		</tr>
 	</table>
 </div>
@@ -220,4 +220,4 @@
 <app-button text="Save" (btnClick)="saveCharacter()"></app-button>
 <hr/>
 
-<a routerLink="/">Go back</a>
+<a [routerLink]="['/charactersheet', character.id]">Go back</a>
