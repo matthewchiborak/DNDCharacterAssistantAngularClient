@@ -16,6 +16,7 @@ import { LoginComponent } from './components/login/login.component';
 import { ErrorInterceptor } from './helpers/error.interceptors';
 import { BasicAuthInterceptor } from './helpers/basic-auth.interceptor';
 import { AuthGuard } from './helpers/auth.guard';
+import { LogoutComponent } from './components/logout/logout.component';
 
 const appRoutes: Routes  = [
 	{path: '', component: CharacterlistComponent, canActivate: [AuthGuard] },
@@ -23,6 +24,7 @@ const appRoutes: Routes  = [
 	{path: 'charactercreator', component: CharacterCreatorComponent, canActivate: [AuthGuard]},
 	{path: 'characterupdater/:id', component: CharacterUpdaterComponent, canActivate: [AuthGuard]},
 	{path: 'login', component: LoginComponent},
+	{path: 'logout', component: LogoutComponent},
 	{path: '**', redirectTo: ''}
 ]
 
@@ -35,7 +37,8 @@ const appRoutes: Routes  = [
     CounterBoxComponent,
     CharacterCreatorComponent,
     CharacterUpdaterComponent,
-    LoginComponent
+    LoginComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
