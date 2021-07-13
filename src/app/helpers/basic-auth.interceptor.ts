@@ -12,10 +12,10 @@ export class BasicAuthInterceptor implements HttpInterceptor {
         // add authorization header with basic auth credentials if available
 		if(this.authenticationService.hasUserSubject()) {
 			const currentUser = this.authenticationService.currentUserValue;
-			if (currentUser && currentUser.authdata) {
+			if (currentUser && currentUser.token) {
 				request = request.clone({
 					setHeaders: { 
-						Authorization: `Basic ${currentUser.authdata}`
+						Authorization: `Basic ${currentUser.token}`
 					}
 				});
 			}

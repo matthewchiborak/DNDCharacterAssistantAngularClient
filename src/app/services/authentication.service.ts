@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-
 import { environment } from '../../environments/environment';
 import { User } from '../models/user';
 import { Login } from '../models/login';
@@ -19,7 +18,7 @@ const httpOptions = {
 })
 export class AuthenticationService {
 
-	private apiUrl = 'http://localhost:6039/users/authenticate';
+	private apiUrl = 'http://localhost:6039/user';
 	private currentUserSubject!: BehaviorSubject<User>;
     public currentUser!: Observable<User>;
 	public loginInfo: Partial<Login> = {};
@@ -43,26 +42,16 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 	
-	public setUserInformation(user: User): void {
-		user.authdata = window.btoa(this.loginInfo.username + ':' + this.loginInfo.password);
-		localStorage.setItem('currentUser', JSON.stringify(user));
-		
-		if(this.currentUser) {
-			this.currentUserSubject = new BehaviorSubject<User>(user);
-			this.currentUser = this.currentUserSubject.asObservable();
-		}
-	}
-
     login(username: string, password: string): Observable<User> {
 		
-				this.loginInfo.username = username;
-				this.loginInfo.password = password;
+				return this.http.post<User>(this.apiUrl, {username, password}).pipe(map(user => {
+					localStorage.setItem('id_token', user.token);
+					return user;
+				}));
 				
-				//return this.http.post<User>(this.apiUrl, this.loginInfo, httpOptions);
-				return this.http.post<User>(this.apiUrl, this.loginInfo, httpOptions).pipe(
+				/*return this.http.post<User>(this.apiUrl, {username, password}).pipe(
 					map(user => {
-						// store user details and basic auth credentials in local storage to keep user logged in between page refreshes
-						user.authdata = window.btoa(username + ':' + password);
+
 						localStorage.setItem('currentUser', JSON.stringify(user));
 						
 						let localCurrentUser = localStorage.getItem('currentUser');
@@ -71,50 +60,40 @@ export class AuthenticationService {
 									this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localCurrentUser));
 									this.currentUser = this.currentUserSubject.asObservable();
 						}
-						
-						//this.currentUserSubject.next(user);
-						/*if(this.currentUser) {
-							this.currentUserSubject = new BehaviorSubject<User>(user);
-							this.currentUser = this.currentUserSubject.asObservable();
-							this.currentUserSubject.next(user);
-						}*/
-						
+
 						return user;
 					})
-				);
+				);*/
 				
-				/*return this.http.post<User>(this.apiUrl, this.loginInfo, httpOptions).subscribe((user) => {
-					user.authdata = window.btoa(username + ':' + password);
-					localStorage.setItem('currentUser', JSON.stringify(user));
-					
-					if(this.currentUser) {
-						this.currentUserSubject = new BehaviorSubject<User>(user);
-						this.currentUser = this.currentUserSubject.asObservable();
-					}
-					
-					return this.currentUser;
-				});*/
-								
-        //return this.http.post<any>(`${environment.apiUrl}/users/authenticate`, { "username": username, "password": password })
-		/*return this.http.post<User>(this.apiUrl, this.loginInfo, httpOptions).pipe(map(user => {
-                // store user details and basic auth credentials in local storage to keep user logged in between page refreshes
-                user.authdata = window.btoa(username + ':' + password);
-                localStorage.setItem('currentUser', JSON.stringify(user));
-				
-				if(this.currentUser) {
-				    this.currentUserSubject = new BehaviorSubject<User>(user);
-					this.currentUser = this.currentUserSubject.asObservable();
-				}
-				
-                this.currentUserSubject.next(user);
-                return user;
-            }));*/
-			
     }
+	
+	//private setSession(authResult) {
+		//const expiresAt = moment().add(authResult.expiresIn,'second');
+
+       // localStorage.setItem('id_token', authResult.idToken);
+        //localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()) );
+	//}
 
     logout() {
         // remove user from local storage to log user out
-        localStorage.removeItem('currentUser');
+		localStorage.removeItem("id_token");
+        //localStorage.removeItem("expires_at");
+        //localStorage.removeItem('currentUser');
         //this.currentUserSubject.next(null);
     }
+	
+	public isLoggedIn() {
+		
+        //return moment().isBefore(this.getExpiration());
+    }
+
+    isLoggedOut() {
+        //return !this.isLoggedIn();
+    }
+
+    getExpiration() {
+        //const expiration = localStorage.getItem("expires_at");
+        //const expiresAt = JSON.parse(expiration);
+        //return moment(expiresAt);
+    }   
 }
