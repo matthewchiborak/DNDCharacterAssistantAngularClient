@@ -251,6 +251,14 @@ export class CharacterUpdaterComponent implements OnInit {
   
   /////////////
   
+  deleteCharacter(): void {
+	  		   this.characterUpdaterService.deleteCharacter(this.character).subscribe((response) => {
+		   
+				alert(response.message);
+		   
+		   });
+  }
+  
   saveCharacter(): void {
 	  this.character.name = this.nameBox.nativeElement.value;
     this.character.speed = this.speedBox.nativeElement.value;

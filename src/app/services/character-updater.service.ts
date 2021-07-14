@@ -16,10 +16,15 @@ const httpOptions = {
 export class CharacterUpdaterService {
 
 	private apiUrl = 'http://localhost:6039/charactersstats';
+	private apiUrlDel = 'http://localhost:6039/characters';
 
   constructor(private http: HttpClient) { }
   
     updateCharacter(character: Partial<Character>): Observable<ServerMessage> {
 	  return this.http.put<ServerMessage>(this.apiUrl, character, httpOptions);
+  }
+  
+	deleteCharacter(character: Partial<Character>): Observable<ServerMessage> {
+	  return this.http.delete<ServerMessage>(this.apiUrlDel + "/" + character.id, httpOptions);
   }
 }
