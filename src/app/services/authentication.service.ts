@@ -9,7 +9,7 @@ import { Login } from '../models/login';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type': 'application/json',
+    'Content-Type': 'application/x-www-form-urlencoded',
   }),
 };
 
@@ -44,9 +44,22 @@ export class AuthenticationService {
 	
     login(username: string, password: string): Observable<User> {
 		
-				return this.http.post<User>(this.apiUrl, {username, password}).pipe(map(user => {
+				let body = new URLSearchParams();
+				body.set('username', username);
+				body.set('password', password);
+		
+				return this.http.post<User>(this.apiUrl, body, httpOptions).pipe(map(user => {
 					localStorage.setItem('id_token', user.token);
-					return user;
+					localStorage.setItem('currentUser', JSON.stringify(user));
+					
+						let localCurrentUser = localStorage.getItem('currentUser');
+	
+						if(localCurrentUser) {
+									this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localCurrentUser));
+									this.currentUser = this.currentUserSubject.asObservable();
+						}
+
+						return user;
 				}));
 				
 				/*return this.http.post<User>(this.apiUrl, {username, password}).pipe(
@@ -78,22 +91,7 @@ export class AuthenticationService {
         // remove user from local storage to log user out
 		localStorage.removeItem("id_token");
         //localStorage.removeItem("expires_at");
-        //localStorage.removeItem('currentUser');
+        localStorage.removeItem('currentUser');
         //this.currentUserSubject.next(null);
     }
-	
-	public isLoggedIn() {
-		
-        //return moment().isBefore(this.getExpiration());
-    }
-
-    isLoggedOut() {
-        //return !this.isLoggedIn();
-    }
-
-    getExpiration() {
-        //const expiration = localStorage.getItem("expires_at");
-        //const expiresAt = JSON.parse(expiration);
-        //return moment(expiresAt);
-    }   
 }

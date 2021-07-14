@@ -14,6 +14,20 @@ export class CharacterlistService {
   
   //Retrieving
   getCharacters(): Observable<Character[]> {
+	 //let customHeaders = new Headers({ Authorization: localStorage.getItem("id_token")});
+	 //const requestOptions: RequestOptionsArgs = { headers: customHeaders };
+	 
+	 /*const headerDict = {
+		  'Content-Type': 'application/json',
+		  'Accept': 'application/json',
+		  'Access-Control-Allow-Headers': 'Content-Type',
+		  'Authorization': localStorage.getItem("id_token")
+		}
+
+		const requestOptions = {                                                                                                                                                                                 
+		  headers: new Headers(headerDict), 
+		};*/
+	  
 	  return this.http.get<Character[]>(this.apiUrl);
   }
   
