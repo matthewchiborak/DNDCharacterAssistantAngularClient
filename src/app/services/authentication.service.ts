@@ -61,38 +61,12 @@ export class AuthenticationService {
 						}
 
 						return user;
-				}));
-				
-				/*return this.http.post<User>(this.apiUrl, {username, password}).pipe(
-					map(user => {
-
-						localStorage.setItem('currentUser', JSON.stringify(user));
-						
-						let localCurrentUser = localStorage.getItem('currentUser');
-	
-						if(localCurrentUser) {
-									this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localCurrentUser));
-									this.currentUser = this.currentUserSubject.asObservable();
-						}
-
-						return user;
-					})
-				);*/
-				
+				}));	
     }
 	
-	//private setSession(authResult) {
-		//const expiresAt = moment().add(authResult.expiresIn,'second');
-
-       // localStorage.setItem('id_token', authResult.idToken);
-        //localStorage.setItem("expires_at", JSON.stringify(expiresAt.valueOf()) );
-	//}
-
     logout() {
         // remove user from local storage to log user out
 		localStorage.removeItem("id_token");
-        //localStorage.removeItem("expires_at");
         localStorage.removeItem('currentUser');
-        //this.currentUserSubject.next(null);
     }
 }

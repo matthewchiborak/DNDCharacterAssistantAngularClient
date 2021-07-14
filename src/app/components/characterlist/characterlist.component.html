@@ -1,8 +1,10 @@
+<h1 id="CharacterSelectHeader">Character Select</h1>
+<hr/>
 <span *ngFor="let character of characters">
 	<a  [routerLink]="['/charactersheet', character.id]">{{character.name}}</a>
 	<br/>
 </span>
 <hr/>
-<a [routerLink]="['/charactercreator']">Add New</a>
-<br/>
+<a id="AddNewCharacterLink" [routerLink]="['/charactercreator']">Add New</a>
+<hr/>
 <app-button text="Log Out" (btnClick)="logout()"></app-button>

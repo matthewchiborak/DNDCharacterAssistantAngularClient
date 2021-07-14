@@ -178,11 +178,11 @@
 	<span>
 		Damage Roll: <input #damageRollBox id="damageRollBox" type="text" value="/r 1d10">
 		Reference Link: <input #attackReferenceLinkBox id="attackReferenceLinkBox" type="text">
-		<app-button text="Add" (btnClick)="addAttack()"></app-button>
+		<app-button id="AddAttackButton" text="Add" (btnClick)="addAttack()"></app-button>
 	</span>
 	<br/>
 	<span>
-		Delete: <input #deleteAttackBox id="deleteAttackBox" type="number" min="1" value="1"><app-button text="X" (btnClick)="deleteAttack()"></app-button>
+		Delete: <input #deleteAttackBox id="deleteAttackBox" type="number" min="1" value="1"><app-button id="DeleteAttackButton" text="X" (btnClick)="deleteAttack()"></app-button>
 	</span>
 </div>
 <div #addedAttacksDiv id="addedAttacksDiv"></div>
@@ -193,11 +193,11 @@
 	<span>
 		Name: <input #counterNameBox id="counterNameBox" type="text">
 		Max Count: <input #counterMaxBox id="counterMaxBox" type="number" min="0" value="10">
-		<app-button text="Add" (btnClick)="addCounter()"></app-button>
+		<app-button id="AddCounterButton" text="Add" (btnClick)="addCounter()"></app-button>
 	</span>
 	<br/>
 	<span>
-		Delete: <input #deleteCounterBox id="deleteCounterBox" type="number" min="1" value="1"><app-button text="X" (btnClick)="deleteCounter()"></app-button>
+		Delete: <input #deleteCounterBox id="deleteCounterBox" type="number" min="1" value="1"><app-button id="DeleteCounterButton" text="X" (btnClick)="deleteCounter()"></app-button>
 	</span>
 </div>
 <div #addedCountersDiv id="addedCountersDiv"></div>
@@ -208,17 +208,17 @@
 	<span>
 		Name: <input #referenceNameBox id="referenceNameBox" type="text">
 		Link: <input #referenceLinkBox id="referenceLinkBox" type="text">
-		<app-button text="Add" (btnClick)="addReference()"></app-button>
+		<app-button id="AddReferenceButton" text="Add" (btnClick)="addReference()"></app-button>
 	</span>
 	<br/>
 	<span>
-		Delete: <input #deleteReferenceBox id="deleteReferenceBox" type="number" min="1" value="1"><app-button text="X" (btnClick)="deleteReference()"></app-button>
+		Delete: <input #deleteReferenceBox id="deleteReferenceBox" type="number" min="1" value="1"><app-button id="DeleteReferenceButton" text="X" (btnClick)="deleteReference()"></app-button>
 	</span>
 </div>
 <div #addedReferencesDiv id="addedReferenceDiv"></div>
 <hr/>
-<app-button text="Save" (btnClick)="saveCharacter()"></app-button>
-<app-button text="Delete" (btnClick)="deleteCharacter()"></app-button>
+<app-button id="SaveCharacterButton" text="Save" (btnClick)="saveCharacter()"></app-button>
+<app-button id="DeleteCharacterButton" text="Delete" (btnClick)="deleteCharacter()"></app-button>
 <hr/>
 
 <a [routerLink]="['/charactersheet', character.id]">Go back</a>

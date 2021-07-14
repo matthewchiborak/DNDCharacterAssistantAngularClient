@@ -56,7 +56,7 @@ export class CharacterSheetComponent implements OnInit {
 	  let modToUse = this.characterSheetService.convertScoreToMod(this.character.dexterityScore!);
 	  
 	  	if(modToUse > 0) {
-			this.copyToClipboard("/r 1d20 + " + modToUse);
+			this.copyToClipboard("/r 1d20+" + modToUse);
 		}
 		else if(modToUse < 0) {
 			this.copyToClipboard("/r 1d20" + modToUse);
@@ -109,7 +109,7 @@ export class CharacterSheetComponent implements OnInit {
 	  }
 	  
 	  	if(modToUse > 0) {
-			this.copyToClipboard("/r 1d20 + " + modToUse);
+			this.copyToClipboard("/r 1d20+" + modToUse);
 		}
 		else if(modToUse < 0) {
 			this.copyToClipboard("/r 1d20" + modToUse);
@@ -135,7 +135,7 @@ export class CharacterSheetComponent implements OnInit {
 		  }
 		  
 			if(modToUse > 0) {
-				this.copyToClipboard("/r 1d20 + " + modToUse);
+				this.copyToClipboard("/r 1d20+" + modToUse);
 			}
 			else if(modToUse < 0) {
 				this.copyToClipboard("/r 1d20" + modToUse);

@@ -1,38 +1,37 @@
-
 <textarea #rollBox type="text" id="rollBox"></textarea>
 <hr/>
-<h2>{{character.name}}</h2>
+<h2 id="CharacterNameHeader">{{character.name}}</h2>
 <hr/>
 	
 <div id="generalStats">
-	<app-button text="Initiative" (btnClick)="rollInit()"></app-button>
+	<app-button id="InitiativeButton" text="Initiative" (btnClick)="rollInit()"></app-button>
 	HP: 
 	<input #hpBox id="hpSpinBox" type="number" min="0" max="{{character.maxHP}}" value="{{character.currentHP}}">
 	Hit Die Current: 
 	<input #hitDieBox id="hitDieSpinBox" type="number" min="0" max="{{character.maxHitDie}}" value="{{character.currentHitDie}}">
 	Hit Die To Use: 
 	<input #hitDieToUseBox id="hitDieToUseSpinBox" type="number" min="0" max="{{character.maxHitDie}}" value="1">
-	<app-button text="Roll Hit Die" (btnClick)="rollHitDie()"></app-button>
-	<span> AC: {{character.ac}}</span>
-	<span> Speed: {{character.speed}}</span>
+	<app-button id="RollHitDieButton" text="Roll Hit Die" (btnClick)="rollHitDie()"></app-button>
+	<span id="ACSpan"> AC: {{character.ac}}</span>
+	<span id="SpeedSpan"> Speed: {{character.speed}}</span>
 </div>
 
 <hr/>
 <h3>Saving Throws</h3>
 <div id="savingThrowButtons">
-	<app-button text="Strength" (btnClick)="saveThrowPressed('str')"></app-button>
-	<app-button text="Dexterity" (btnClick)="saveThrowPressed('dex')"></app-button>
-	<app-button text="Constitution" (btnClick)="saveThrowPressed('con')"></app-button>
-	<app-button text="Intelligence"  (btnClick)="saveThrowPressed('intel')"></app-button>
-	<app-button text="Wisdom"  (btnClick)="saveThrowPressed('wis')"></app-button>
-	<app-button text="Charisma"  (btnClick)="saveThrowPressed('cha')"></app-button>
+	<app-button id="StrengthSaveThrowButton" text="Strength" (btnClick)="saveThrowPressed('str')"></app-button>
+	<app-button id="DexteritySaveThrowButton" text="Dexterity" (btnClick)="saveThrowPressed('dex')"></app-button>
+	<app-button id="ConstitutionSaveThrowButton" text="Constitution" (btnClick)="saveThrowPressed('con')"></app-button>
+	<app-button id="IntelligenceSaveThrowButton" text="Intelligence"  (btnClick)="saveThrowPressed('intel')"></app-button>
+	<app-button id="WisdomSaveThrowButton" text="Wisdom"  (btnClick)="saveThrowPressed('wis')"></app-button>
+	<app-button id="CharismaSaveThrowButton" text="Charisma"  (btnClick)="saveThrowPressed('cha')"></app-button>
 </div>
 
 <hr/>
 <h3>Skills</h3>
 <div id="skillButtons">
 	<span *ngFor="let skill of character.skills; let i = index">
-		<app-button text="{{skill.name}}" (btnClick)="skillRoll(i)"></app-button>
+		<app-button id="{{skill.name}}Button" text="{{skill.name}}" (btnClick)="skillRoll(i)"></app-button>
 	</span>
 </div>
 
@@ -85,7 +84,7 @@
 <h3>Level 5 <input #SlotsBox5 id="spellsSlots5" type="number" min="0" max="{{character.maxSlots5}}" value="{{character.currentSlots5}}"></h3>
 <div id="level5">
 	<span *ngFor="let attack of character.attacks">
-		<app-button *ngIf="attack.level == 5" text="{{attack.name}}" (btnClick)="makeAttackRoll(attack.attackRoll, attack.damageRoll, attack.level)"></app-button>
+		<app-button *ngIf="attack.level == 5" id="{{attack.name}}Button" text="{{attack.name}}" (btnClick)="makeAttackRoll(attack.attackRoll, attack.damageRoll, attack.level)"></app-button>
 		<app-button *ngIf="attack.level == 5" text="?" (btnClick)="openHelp(attack.referenceLink)"></app-button>
 	</span>
 </div>
@@ -138,12 +137,12 @@
 <h3>Other References</h3>
 <div id="references">
 	<span *ngFor="let reference of character.references">
-		<app-button text="{{reference.name}}" (btnClick)="openHelp(reference.link)"></app-button> 
+		<app-button id="{{reference.name}}Button" text="{{reference.name}}" (btnClick)="openHelp(reference.link)"></app-button> 
 	</span>
 </div>
 
 <hr/>
-<app-button text="Save" (btnClick)="saveData()"></app-button>
+<app-button id="SaveStateButton" text="Save" (btnClick)="saveData()"></app-button>
 <hr/>
 <a [routerLink]="['/characterupdater', character.id]">Update</a>
 <br/>
