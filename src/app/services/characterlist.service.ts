@@ -9,6 +9,7 @@ import { Character } from '../models/character';
 export class CharacterlistService {
 
 	private apiUrl = 'http://localhost:6039/characters';
+	//private currentAuthToken: string | null = " ";
 
   constructor(private http: HttpClient) { }
   
@@ -28,7 +29,20 @@ export class CharacterlistService {
 		  headers: new Headers(headerDict), 
 		};*/
 	  
-	  return this.http.get<Character[]>(this.apiUrl);
+	  //if(localStorage.getItem("id_token") != null)
+		//this.currentAuthToken = localStorage.getItem("id_token");
+	  
+	  /*const httpOptions = {
+		  headers: new HttpHeaders({
+			'Content-Type': 'application/json',
+			Authorization: this.currentAuthToken as string
+		  })
+		};*/
+		
+		//console.log(this.currentAuthToken);
+		//console.log(httpOptions);
+	  
+	  return this.http.get<Character[]>(this.apiUrl);//, httpOptions);
   }
   
   

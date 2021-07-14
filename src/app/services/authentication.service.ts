@@ -51,6 +51,7 @@ export class AuthenticationService {
 				return this.http.post<User>(this.apiUrl, body, httpOptions).pipe(map(user => {
 					localStorage.setItem('id_token', user.token);
 					localStorage.setItem('currentUser', JSON.stringify(user));
+					console.log(user.token);
 					
 						let localCurrentUser = localStorage.getItem('currentUser');
 	
