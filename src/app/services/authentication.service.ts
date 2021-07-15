@@ -5,7 +5,6 @@ import { map } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
 import { User } from '../models/user';
-import { Login } from '../models/login';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -18,10 +17,9 @@ const httpOptions = {
 })
 export class AuthenticationService {
 
-	private apiUrl = 'http://localhost:6039/user';
+	private apiUrl = environment.apiUrl + "user";
 	private currentUserSubject!: BehaviorSubject<User>;
     public currentUser!: Observable<User>;
-	public loginInfo: Partial<Login> = {};
 
   constructor(private http: HttpClient) { 
 		let localCurrentUser = localStorage.getItem('currentUser');
@@ -33,6 +31,12 @@ export class AuthenticationService {
   }
   
 	public hasUserSubject(): boolean {
+		
+			if(this.checkIfTokenIsExpired()) {
+				this.logout();
+				return false;
+			}
+		
 			if(this.currentUserSubject)
 				return true;
 			return false;
@@ -41,6 +45,18 @@ export class AuthenticationService {
     public get currentUserValue(): User {		
         return this.currentUserSubject.value;
     }
+	
+	public checkIfTokenIsExpired(): boolean {
+		let tokenToCheck = localStorage.getItem('id_token');
+		
+		if(!tokenToCheck) {
+			return false; //Token does not exist
+		}
+		
+		 const expiry = (JSON.parse(atob(tokenToCheck.split('.')[1]))).exp;
+		 return (Math.floor((new Date).getTime() / 1000)) >= expiry;
+	}
+	
 	
     login(username: string, password: string): Observable<User> {
 		
@@ -51,7 +67,6 @@ export class AuthenticationService {
 				return this.http.post<User>(this.apiUrl, body, httpOptions).pipe(map(user => {
 					localStorage.setItem('id_token', user.token);
 					localStorage.setItem('currentUser', JSON.stringify(user));
-					console.log(user.token);
 					
 						let localCurrentUser = localStorage.getItem('currentUser');
 	

@@ -3,6 +3,7 @@ import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Character } from '../models/character';
 import { ServerMessage } from '../models/serverMessage';
+import { environment } from '../../environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -15,8 +16,8 @@ const httpOptions = {
 })
 export class CharacterUpdaterService {
 
-	private apiUrl = 'http://localhost:6039/charactersstats';
-	private apiUrlDel = 'http://localhost:6039/characters';
+	private apiUrl = environment.apiUrl + 'charactersstats';
+	private apiUrlDel = environment.apiUrl + 'characters';
 
   constructor(private http: HttpClient) { }
   
